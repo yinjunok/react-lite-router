@@ -10,7 +10,7 @@ const ParamsPage = () => {
   return <h1>The Params id is: {id}</h1>
 }
 
-const Hello = () => {
+const App = () => {
   const { back, push } = useHistory()
 
   return (
@@ -37,7 +37,7 @@ const Hello = () => {
 
 ReactDOM.render(
   <Router>
-    <Hello />
+    <App />
   </Router>,
   document.getElementById('root')
 )
