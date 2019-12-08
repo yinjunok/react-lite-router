@@ -1,5 +1,6 @@
 import React, { FC, useContext, createContext } from 'react'
-import { pathToRegexp, match } from 'path-to-regexp'
+import { match } from 'path-to-regexp'
+import isMatchPath from './isMatchPath'
 import { RouterCtx } from './Router'
 
 export interface IParams {
@@ -14,14 +15,13 @@ export interface IRouteProps {
 const ParamsCtx = createContext<IParams>({})
 const Route: FC<IRouteProps> = ({ path, component: Com }) => {
   const curPath = useContext(RouterCtx)
-  const re = pathToRegexp(path)
   const m = match(path)(curPath)
 
   return (
     <ParamsCtx.Provider value={ m ? m.params as { [p: string]: string } : {} }>
       <>
       {
-        re.test(curPath)
+        isMatchPath(path, curPath)
         ? <Com />
         : null
       }
